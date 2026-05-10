@@ -7,15 +7,17 @@
 
   <style>
     :root {
-      --bg: #050505;
+      --bg: #070707;
       --panel: #0d0d0d;
-      --text: #e8e8e8;
-      --muted: #9ca3af;
-      --green: #39ff88;
-      --border: #262626;
+      --text: #e5e5e5;
+      --muted: #8b8b8b;
+      --line: #252525;
+      --green: #00ff88;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
@@ -24,35 +26,37 @@
     }
 
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
       font-family: "Courier New", monospace;
-      line-height: 1.6;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
+      color: var(--text);
+      line-height: 1.7;
     }
 
     a {
-      color: var(--green);
+      color: inherit;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 30px 22px;
-    }
-
     header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 7, 7, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 80px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 20px;
     }
 
     .logo {
@@ -61,151 +65,260 @@
     }
 
     nav a {
-      margin-left: 22px;
+      margin-left: 24px;
       color: var(--muted);
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero, section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 22px;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
     }
 
     .status {
       display: inline-block;
-      border: 1px solid var(--green);
+      border: 1px solid rgba(0,255,136,0.4);
+      background: rgba(0,255,136,0.08);
       color: var(--green);
-      padding: 6px 12px;
+      padding: 8px 12px;
+      font-size: 12px;
+      letter-spacing: 1px;
       margin-bottom: 35px;
-      font-size: 14px;
     }
 
     .cmd {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .cmd::before {
+      content: "$ ";
       color: var(--green);
-      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: 58px;
-      line-height: 1.1;
-      margin: 0;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 20px;
     }
 
-    h2 {
-      font-size: 34px;
-      margin-top: 0;
-    }
-
-    h3 {
+    .cursor {
       color: var(--green);
-      margin-bottom: 8px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     .subtitle {
       color: var(--muted);
-      font-size: 22px;
-      margin-top: 12px;
+      font-size: 20px;
+      margin-bottom: 30px;
     }
 
     .hero p {
-      max-width: 760px;
-      font-size: 18px;
-      color: #cfcfcf;
+      max-width: 650px;
+      color: #bdbdbd;
+      font-size: 17px;
     }
 
     .buttons {
-      margin-top: 28px;
+      margin-top: 35px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .button {
-      display: inline-block;
-      border: 1px solid var(--green);
-      padding: 10px 16px;
-      margin-right: 12px;
+      border: 1px solid var(--line);
+      padding: 12px 18px;
+      color: #fff;
+      transition: 0.2s;
+    }
+
+    .button:hover {
+      border-color: var(--green);
       color: var(--green);
     }
 
     .terminal {
       background: var(--panel);
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       padding: 24px;
-      margin-top: 45px;
-      border-radius: 10px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+    }
+
+    .terminal-top {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .terminal p {
+      color: #cfcfcf;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .terminal span {
+      color: var(--green);
     }
 
     section {
-      margin-top: 110px;
+      border-top: 1px solid var(--line);
     }
 
-    .section-label {
-      color: var(--muted);
-      margin-bottom: 10px;
+    .section-head {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 25px;
+      margin-bottom: 45px;
+    }
+
+    .num {
+      font-size: 48px;
+      color: #242424;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 38px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .prompt {
+      color: var(--green);
+      font-size: 14px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
 
     .card {
       background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 22px;
-      border-radius: 10px;
+      border: 1px solid var(--line);
+      padding: 26px;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--green);
+      transform: translateY(-3px);
+    }
+
+    .card small {
+      color: var(--green);
+    }
+
+    .card h3 {
+      margin: 14px 0;
+      font-size: 22px;
+      color: #fff;
     }
 
     .card p {
-      color: #cfcfcf;
+      color: #b8b8b8;
+      margin-bottom: 18px;
     }
 
-    .tags span {
-      display: inline-block;
-      border: 1px solid var(--border);
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
       color: var(--muted);
-      padding: 4px 8px;
-      margin: 5px 5px 0 0;
-      font-size: 13px;
+      padding: 5px 8px;
+      font-size: 12px;
     }
 
-    .timeline-item {
-      border-left: 1px solid var(--green);
-      padding-left: 20px;
-      margin-bottom: 28px;
+    .timeline {
+      display: grid;
+      gap: 28px;
     }
 
-    .muted {
+    .item {
+      border-left: 1px solid var(--line);
+      padding-left: 24px;
+    }
+
+    .date {
+      color: var(--green);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skills ul {
+      list-style: none;
       color: var(--muted);
+      font-size: 14px;
+    }
+
+    .skills li::before {
+      content: "→ ";
+      color: var(--green);
     }
 
     footer {
-      margin-top: 100px;
-      padding-top: 30px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
+      border-top: 1px solid var(--line);
       text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    @media (max-width: 700px) {
-      header {
-        display: block;
+    @media (max-width: 800px) {
+      .hero, .grid, .skills {
+        grid-template-columns: 1fr;
       }
 
       nav {
-        margin-top: 15px;
+        display: none;
       }
 
-      nav a {
-        display: inline-block;
-        margin: 8px 12px 0 0;
-      }
-
-      h1 {
-        font-size: 42px;
+      .section-head {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <header>
-      <div class="logo">$ iamsanway</div>
+  <header>
+    <div class="nav">
+      <div class="logo">$ sanway_chatterjee</div>
       <nav>
         <a href="#projects">Projects</a>
         <a href="#research">Research</a>
@@ -213,182 +326,221 @@
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main class="hero">
-      <div class="status">STATUS: PHD STUDENT · QUANTUM SENSING</div>
+  <main class="hero">
+    <div>
+      <div class="status">STATUS: PHD CANDIDATE @ UNR</div>
 
-      <div class="cmd">&gt; init --user</div>
+      <div class="cmd">init --user</div>
 
-      <h1>Sanway Chatterjee<span style="color: var(--green);">_</span></h1>
-      <div class="subtitle">Physics PhD Student · AMO Physics · Quantum Sensing</div>
+      <h1>Sanway Chatterjee<span class="cursor">_</span></h1>
+
+      <div class="subtitle">
+        Physics PhD Candidate · AMO Physics · Quantum Sensing
+      </div>
 
       <p>
-        I build experiments, simulations, and software tools for quantum sensing,
-        atomic physics, scientific instrumentation, AI, and quantum computing.
+        I am currently a PhD candidate working toward building quantum sensors
+        to image molecules at the nanoscale. I am also interested in quantum
+        computing, machine learning, and AI.
       </p>
 
       <div class="buttons">
         <a class="button" href="#projects">View My Work</a>
         <a class="button" href="#contact">Get in Touch</a>
       </div>
+    </div>
 
-      <div class="terminal">
-        <p><span class="cmd">$ whoami</span></p>
-        <p>→ physicist · experimentalist · scientific-programmer</p>
-
-        <p><span class="cmd">$ cat focus.txt</span></p>
-        <p>→ quantum_sensing</p>
-        <p>→ amo_physics</p>
-        <p>→ single_atom_detection</p>
-        <p>→ ai_ml</p>
-        <p>→ quantum_computing</p>
-
-        <p><span class="cmd">$ stack --short</span></p>
-        <p>→ python · numpy · scipy · qiskit</p>
-        <p>→ daq control · simulations · data analysis</p>
-
-        <p><span class="cmd">$ status</span></p>
-        <p>→ BUILDING ▋</p>
+    <div class="terminal">
+      <div class="terminal-top">
+        <span>sanway@physics:~</span>
+        <span>READY</span>
       </div>
-    </main>
 
-    <section id="projects">
-      <div class="section-label">01</div>
-      <h2>Projects</h2>
-      <div class="cmd">&gt; ls ./projects/ — selected work</div>
+      <div class="cmd">whoami</div>
+      <p>→ PhD candidate</p>
+      <p>→ AMO physics researcher</p>
+      <p>→ Quantum computing and AI/ML enthusiast</p>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Quantum Sensing Simulations</h3>
-          <p>
-            Simulations of spin dynamics, pulse sequences, and electron-nuclear
-            interactions for quantum sensing and NMR-style detection.
-          </p>
-          <div class="tags">
-            <span>Python</span><span>NumPy</span><span>Quantum Sensing</span>
-          </div>
-        </div>
+      <div class="cmd">cat focus.txt</div>
+      <p>→ null</p>
 
-        <div class="card">
-          <h3>DAQ / Photon Counting Control</h3>
-          <p>
-            Instrument-control software for photon counting, buffered counters,
-            timing, and experimental automation using Python and NI-DAQmx.
-          </p>
-          <div class="tags">
-            <span>Python</span><span>NI-DAQmx</span><span>SPCM</span>
-          </div>
-        </div>
+      <div class="cmd">status</div>
+      <p><span>→ BUILDING</span><span class="cursor">_</span></p>
+    </div>
+  </main>
 
-        <div class="card">
-          <h3>GitHub Scanner SaaS</h3>
-          <p>
-            Recruiter-facing AI tool that scans GitHub profiles, analyzes
-            projects, and generates professional developer reports.
-          </p>
-          <div class="tags">
-            <span>FastAPI</span><span>React</span><span>OpenAI</span>
-          </div>
+  <section id="projects">
+    <div class="section-head">
+      <div class="num">01</div>
+      <div>
+        <h2>Projects</h2>
+        <div class="prompt">&gt; ls ./projects</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <small>&gt; project_01</small>
+        <h3>Quantum Sensing Simulation</h3>
+        <p>
+          Python simulations of electron-nuclear spin dynamics, pulse sequences,
+          detuning effects, and NMR-style quantum sensing.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">SciPy</span>
+          <span class="tag">Quantum Sensing</span>
         </div>
       </div>
-    </section>
-
-    <section id="research">
-      <div class="section-label">02</div>
-      <h2>Research</h2>
-      <div class="cmd">&gt; cat ./research.md</div>
 
       <div class="card">
-        <h3>Quantum Sensing with Rb Atoms in Solid Neon</h3>
+        <small>&gt; project_02</small>
+        <h3>DAQ Photon Counting Toolkit</h3>
         <p>
-          My PhD research focuses on using rubidium atoms embedded in solid neon
-          as quantum sensors. I work on optical pumping, RF control, coherence
-          measurements, dynamical decoupling, and optical readout for nanoscale
-          magnetic sensing.
+          NI-DAQmx based buffered counter tools for SPCM photon counting,
+          timing control, and experimental readout automation.
         </p>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="section-label">03</div>
-      <h2>Experience</h2>
-      <div class="cmd">&gt; git log --all --oneline</div>
-
-      <div class="timeline-item">
-        <h3>PhD Student in Physics</h3>
-        <p class="muted">University of Nevada, Reno · 2023 — Present</p>
-        <p>
-          Research in AMO physics, quantum sensing, spin control, spectroscopy,
-          optical systems, and experimental automation.
-        </p>
-      </div>
-
-      <div class="timeline-item">
-        <h3>Scientific Computing & Instrumentation</h3>
-        <p class="muted">Python · DAQ · Simulations · Lab Automation</p>
-        <p>
-          Building tools for data acquisition, photon counting, pulse control,
-          simulation, and scientific analysis.
-        </p>
-      </div>
-    </section>
-
-    <section id="skills">
-      <div class="section-label">04</div>
-      <h2>Skills</h2>
-      <div class="cmd">&gt; ls -la ./stack/</div>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Physics</h3>
-          <p>AMO Physics · Quantum Sensing · Atomic Physics · NMR · Optics</p>
-        </div>
-
-        <div class="card">
-          <h3>Programming</h3>
-          <p>Python · NumPy · SciPy · Matplotlib · Git · FastAPI · React</p>
-        </div>
-
-        <div class="card">
-          <h3>Learning</h3>
-          <p>AI/ML · Qiskit · Quantum Algorithms · PINNs · SaaS Development</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">NI-DAQmx</span>
+          <span class="tag">Hardware Control</span>
+          <span class="tag">SPCM</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact">
-      <div class="section-label">05</div>
-      <h2>Get in Touch</h2>
-      <div class="cmd">&gt; open inbox</div>
+  <section id="research">
+    <div class="section-head">
+      <div class="num">02</div>
+      <div>
+        <h2>Research</h2>
+        <div class="prompt">&gt; cat ./research.md</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Quantum sensing with rubidium atoms in solid neon</h3>
+      <p>
+        My PhD research focuses on developing quantum sensors based on rubidium
+        atoms embedded in solid neon. The long-term goal is to use individual
+        atoms as nanoscale magnetic sensors capable of detecting nearby nuclear
+        spins and eventually imaging molecules at the nanoscale.
+      </p>
+
+      <p>
+        In the experiment, rubidium atoms are optically initialized and read out
+        using laser-induced fluorescence. RF control is used to drive transitions
+        between spin states, and dynamical decoupling pulse sequences are applied
+        to make the sensor sensitive to weak oscillating magnetic fields from
+        nearby nuclei.
+      </p>
+
+      <p>
+        My current work involves coherent control, optical pumping and readout,
+        photon-counting measurements, pulse-sequence optimization, NMR detection,
+        and improving the experimental platform toward single-atom sensing.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <div class="num">03</div>
+      <div>
+        <h2>Experience</h2>
+        <div class="prompt">&gt; git log --career</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="item">
+        <div class="date">2024 — Present</div>
+        <h3>Graduate Research Assistant · University of Nevada, Reno</h3>
+        <p>
+          Working on AMO physics and quantum sensing experiments involving
+          rubidium atoms in solid neon, coherent RF control, optical readout,
+          NMR detection, and experimental automation.
+        </p>
+      </div>
+
+      <div class="item">
+        <div class="date">2023 — 2024</div>
+        <h3>Teaching Assistant · University of Nevada, Reno</h3>
+        <p>
+          Supported undergraduate physics instruction through teaching,
+          grading, office hours, and student mentoring.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <div class="num">04</div>
+      <div>
+        <h2>Skills</h2>
+        <div class="prompt">&gt; ls ./stack</div>
+      </div>
+    </div>
+
+    <div class="skills">
+      <div class="card">
+        <h3>Language</h3>
+        <ul>
+          <li>Python</li>
+        </ul>
+      </div>
 
       <div class="card">
-        <h3>Let’s connect<span style="color: var(--green);">_</span></h3>
-        <p>
-          I’m interested in quantum sensing, scientific software, AI/ML,
-          quantum computing, and research collaborations.
-        </p>
-
-        <p>
-          GitHub:
-          <a href="https://github.com/iamsanway" target="_blank">
-            github.com/iamsanway
-          </a>
-        </p>
-
-        <p>
-          Email:
-          <a href="mailto:iamsanway@gmail.com">
-            your-email@example.com
-          </a>
-        </p>
+        <h3>Software</h3>
+        <ul>
+          <li>Igor Pro</li>
+          <li>Fusion 360</li>
+        </ul>
       </div>
-    </section>
 
-    <footer>
-      © 2026 Sanway Chatterjee · Built with HTML + CSS · Hosted on GitHub Pages
-    </footer>
+      <div class="card">
+        <h3>Tools</h3>
+        <ul>
+          <li>NI-DAQmx</li>
+          <li>LabJack</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <section id="contact">
+    <div class="section-head">
+      <div class="num">05</div>
+      <div>
+        <h2>Contact</h2>
+        <div class="prompt">&gt; open inbox</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Let’s connect<span class="cursor">_</span></h3>
+      <p>
+        Reach out for research discussions, quantum sensing, scientific software,
+        quantum computing, AI/ML, or collaboration.
+      </p>
+
+      <div class="buttons">
+        <a class="button" href="mailto:your.email@example.com">Email Me</a>
+        <a class="button" href="https://github.com/iamsanway">GitHub</a>
+        <a class="button" href="#">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &gt; © 2026 Sanway Chatterjee · Built with HTML + CSS · Hosted on GitHub Pages
+  </footer>
+
 </body>
 </html>
