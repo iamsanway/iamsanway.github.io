@@ -1,106 +1,394 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sanway Chatterjee</title>
+
   <style>
+    :root {
+      --bg: #050505;
+      --panel: #0d0d0d;
+      --text: #e8e8e8;
+      --muted: #9ca3af;
+      --green: #39ff88;
+      --border: #262626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Courier New", monospace;
       line-height: 1.6;
     }
 
-    .container {
-      max-width: 850px;
-      margin: auto;
-      padding: 60px 25px;
-    }
-
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #58a6ff;
-      margin-top: 40px;
-    }
-
     a {
-      color: #58a6ff;
+      color: var(--green);
       text-decoration: none;
     }
 
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 22px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 80px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .logo {
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 22px;
+      color: var(--muted);
+    }
+
+    .status {
+      display: inline-block;
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 6px 12px;
+      margin-bottom: 35px;
+      font-size: 14px;
+    }
+
+    .cmd {
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 58px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 34px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 22px;
+      margin-top: 12px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 18px;
+      color: #cfcfcf;
+    }
+
+    .buttons {
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      border: 1px solid var(--green);
+      padding: 10px 16px;
+      margin-right: 12px;
+      color: var(--green);
+    }
+
     .terminal {
-      background: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 12px;
-      padding: 25px;
-      margin-top: 30px;
-      font-family: monospace;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-top: 45px;
+      border-radius: 10px;
     }
 
-    .prompt {
-      color: #7ee787;
+    section {
+      margin-top: 110px;
     }
 
-    .section {
-      margin-top: 35px;
+    .section-label {
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 22px;
+      border-radius: 10px;
+    }
+
+    .card p {
+      color: #cfcfcf;
+    }
+
+    .tags span {
+      display: inline-block;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 4px 8px;
+      margin: 5px 5px 0 0;
+      font-size: 13px;
+    }
+
+    .timeline-item {
+      border-left: 1px solid var(--green);
+      padding-left: 20px;
+      margin-bottom: 28px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 100px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        display: block;
+      }
+
+      nav {
+        margin-top: 15px;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 8px 12px 0 0;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Hello, I'm Sanway 👋</h1>
-    <p>
-      PhD student in Physics working on AMO physics, quantum sensing,
-      scientific instrumentation, Python, AI, and quantum computing.
-    </p>
 
-    <div class="terminal">
-      <p><span class="prompt">sanway@physics:~$</span> whoami</p>
+    <header>
+      <div class="logo">$ iamsanway</div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="status">STATUS: PHD STUDENT · QUANTUM SENSING</div>
+
+      <div class="cmd">&gt; init --user</div>
+
+      <h1>Sanway Chatterjee<span style="color: var(--green);">_</span></h1>
+      <div class="subtitle">Physics PhD Student · AMO Physics · Quantum Sensing</div>
+
       <p>
-        I build experiments, simulations, and software tools for quantum sensing
-        and scientific research.
+        I build experiments, simulations, and software tools for quantum sensing,
+        atomic physics, scientific instrumentation, AI, and quantum computing.
       </p>
-    </div>
 
-    <div class="section">
-      <h2>Research</h2>
-      <p>
-        My research focuses on quantum sensing using rubidium atoms in solid neon,
-        spin control, optical readout, and nanoscale magnetometry.
-      </p>
-    </div>
+      <div class="buttons">
+        <a class="button" href="#projects">View My Work</a>
+        <a class="button" href="#contact">Get in Touch</a>
+      </div>
 
-    <div class="section">
+      <div class="terminal">
+        <p><span class="cmd">$ whoami</span></p>
+        <p>→ physicist · experimentalist · scientific-programmer</p>
+
+        <p><span class="cmd">$ cat focus.txt</span></p>
+        <p>→ quantum_sensing</p>
+        <p>→ amo_physics</p>
+        <p>→ single_atom_detection</p>
+        <p>→ ai_ml</p>
+        <p>→ quantum_computing</p>
+
+        <p><span class="cmd">$ stack --short</span></p>
+        <p>→ python · numpy · scipy · qiskit</p>
+        <p>→ daq control · simulations · data analysis</p>
+
+        <p><span class="cmd">$ status</span></p>
+        <p>→ BUILDING ▋</p>
+      </div>
+    </main>
+
+    <section id="projects">
+      <div class="section-label">01</div>
       <h2>Projects</h2>
-      <ul>
-        <li>Quantum sensing simulations</li>
-        <li>DAQ and photon-counting control software</li>
-        <li>GitHub Scanner SaaS</li>
-        <li>Qiskit and quantum computing projects</li>
-        <li>Physics-informed neural networks</li>
-      </ul>
-    </div>
+      <div class="cmd">&gt; ls ./projects/ — selected work</div>
 
-    <div class="section">
+      <div class="grid">
+        <div class="card">
+          <h3>Quantum Sensing Simulations</h3>
+          <p>
+            Simulations of spin dynamics, pulse sequences, and electron-nuclear
+            interactions for quantum sensing and NMR-style detection.
+          </p>
+          <div class="tags">
+            <span>Python</span><span>NumPy</span><span>Quantum Sensing</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>DAQ / Photon Counting Control</h3>
+          <p>
+            Instrument-control software for photon counting, buffered counters,
+            timing, and experimental automation using Python and NI-DAQmx.
+          </p>
+          <div class="tags">
+            <span>Python</span><span>NI-DAQmx</span><span>SPCM</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>GitHub Scanner SaaS</h3>
+          <p>
+            Recruiter-facing AI tool that scans GitHub profiles, analyzes
+            projects, and generates professional developer reports.
+          </p>
+          <div class="tags">
+            <span>FastAPI</span><span>React</span><span>OpenAI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <div class="section-label">02</div>
+      <h2>Research</h2>
+      <div class="cmd">&gt; cat ./research.md</div>
+
+      <div class="card">
+        <h3>Quantum Sensing with Rb Atoms in Solid Neon</h3>
+        <p>
+          My PhD research focuses on using rubidium atoms embedded in solid neon
+          as quantum sensors. I work on optical pumping, RF control, coherence
+          measurements, dynamical decoupling, and optical readout for nanoscale
+          magnetic sensing.
+        </p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-label">03</div>
+      <h2>Experience</h2>
+      <div class="cmd">&gt; git log --all --oneline</div>
+
+      <div class="timeline-item">
+        <h3>PhD Student in Physics</h3>
+        <p class="muted">University of Nevada, Reno · 2023 — Present</p>
+        <p>
+          Research in AMO physics, quantum sensing, spin control, spectroscopy,
+          optical systems, and experimental automation.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>Scientific Computing & Instrumentation</h3>
+        <p class="muted">Python · DAQ · Simulations · Lab Automation</p>
+        <p>
+          Building tools for data acquisition, photon counting, pulse control,
+          simulation, and scientific analysis.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-label">04</div>
       <h2>Skills</h2>
-      <p>
-        Python · Scientific Computing · AMO Physics · Quantum Sensing ·
-        Machine Learning · Quantum Computing · GitHub · Instrument Control
-      </p>
-    </div>
+      <div class="cmd">&gt; ls -la ./stack/</div>
 
-    <div class="section">
-      <h2>Contact</h2>
-      <p>
-        GitHub:
-        <a href="https://github.com/iamsanway" target="_blank">github.com/iamsanway</a>
-      </p>
-    </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Physics</h3>
+          <p>AMO Physics · Quantum Sensing · Atomic Physics · NMR · Optics</p>
+        </div>
+
+        <div class="card">
+          <h3>Programming</h3>
+          <p>Python · NumPy · SciPy · Matplotlib · Git · FastAPI · React</p>
+        </div>
+
+        <div class="card">
+          <h3>Learning</h3>
+          <p>AI/ML · Qiskit · Quantum Algorithms · PINNs · SaaS Development</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-label">05</div>
+      <h2>Get in Touch</h2>
+      <div class="cmd">&gt; open inbox</div>
+
+      <div class="card">
+        <h3>Let’s connect<span style="color: var(--green);">_</span></h3>
+        <p>
+          I’m interested in quantum sensing, scientific software, AI/ML,
+          quantum computing, and research collaborations.
+        </p>
+
+        <p>
+          GitHub:
+          <a href="https://github.com/iamsanway" target="_blank">
+            github.com/iamsanway
+          </a>
+        </p>
+
+        <p>
+          Email:
+          <a href="mailto:iamsanway@gmail.com">
+            your-email@example.com
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Sanway Chatterjee · Built with HTML + CSS · Hosted on GitHub Pages
+    </footer>
+
   </div>
 </body>
 </html>
